@@ -90,7 +90,7 @@ const login = async (req, res) => {
 
     const token = await userService.loginUser(email, password);
 
-    res.status(200).json(token);
+    res.status(200).json({ token: token });
   } catch (error) {
     res.status(401).json({ error: error.message });
   }

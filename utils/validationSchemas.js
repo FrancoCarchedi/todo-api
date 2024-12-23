@@ -51,11 +51,25 @@ const loginSchema = Joi.object({
   }),
 });
 
-const taskSchema = Joi.object({
-  title: Joi.string().min(3).required(),
+const createTaskSchema = Joi.object({
+  name: Joi.string().min(3).max(255).required().messages({
+    'any.required': "El campo 'name' es obligatorio.",
+  }),
   description: Joi.string().optional(),
-  status: Joi.string().valid('pending', 'completed').optional(),
-  userId: Joi.string().required(),
+  status: Joi.string().valid('pending', 'completed').required(),
+  endsDate: Joi.date().optional(),
+  userId: Joi.string().required().messages({
+    'any.required': "El campo 'userId' es obligatorio.",
+  }),
 });
 
-module.exports = { createUserSchema, updateUserSchema, loginSchema, taskSchema };
+const updateTaskSchema = Joi.object({
+  name: Joi.string().min(3).max(255).optional().messages({
+    'any.required': "El campo 'name' es obligatorio.",
+  }),
+  description: Joi.string().optional(),
+  status: Joi.string().valid('pending', 'completed').optional(),
+  endsDate: Joi.date().optional(),
+});
+
+module.exports = { createUserSchema, updateUserSchema, loginSchema, createTaskSchema, updateTaskSchema };

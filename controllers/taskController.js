@@ -21,9 +21,11 @@ const getTaskById = async (req, res) => {
 };
 
 const getAllTasksByUser = async (req, res) => {
+  const { orderBy = "id", orderDirection = "ASC" } = req.query;
+
   try {
     const { id } = req.params;
-    const tasks = await taskService.getAllTasksByUser(id);
+    const tasks = await taskService.getAllTasksByUser(id, orderBy, orderDirection);
     return res.status(200).json(tasks);
   } catch (error) {
     return res.status(500).json({ error: error.message });

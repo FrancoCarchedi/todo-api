@@ -15,8 +15,16 @@ const getTaskById = async (taskId) => {
   return task;
 };
 
-const getAllTasksByUser = async (userId) => {
-  return await Task.findAll({ where: { userId } });
+const getAllTasksByUser = async (userId, orderBy = "id", orderDirection = "ASC") => {
+  const validFields = ["id", "createdAt", "updatedAt"];
+  const validDirections = ["ASC", "DESC"];
+
+  if (!validFields.includes(orderBy)) orderBy = "id";
+  if (!validDirections.includes(orderDirection.toUpperCase())) orderDirection = "ASC";
+
+  const tasks = await Task.findAll({ where: { userId }, order: [[orderBy, orderDirection.toUpperCase()]] });
+
+  return tasks;
 };
 
 const createTask = async (taskData) => {
