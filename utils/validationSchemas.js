@@ -57,7 +57,7 @@ const createTaskSchema = Joi.object({
   }),
   description: Joi.string().optional(),
   status: Joi.string().valid('pending', 'completed').required(),
-  endsDate: Joi.date().optional(),
+  endsDate: Joi.string().optional(),
   userId: Joi.string().required().messages({
     'any.required': "El campo 'userId' es obligatorio.",
   }),
@@ -69,7 +69,7 @@ const updateTaskSchema = Joi.object({
   }),
   description: Joi.string().optional(),
   status: Joi.string().valid('pending', 'completed').optional(),
-  endsDate: Joi.date().optional(),
+  endsDate: Joi.string().optional(),
 });
 
 module.exports = { createUserSchema, updateUserSchema, loginSchema, createTaskSchema, updateTaskSchema };
