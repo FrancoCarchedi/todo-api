@@ -4,11 +4,12 @@ Desarrollo de API Back End, para proyecto de tipo challenge, de usuarios y tarea
 
 ## Tabla de Contenidos
 
-1. [Descripción General](#descripcion-general)
-2. [Tecnologías Utilizadas](#tecnologias-utilizadas)
-3. [Características](#caracteristicas)
-4. [Instalación y Configuración](#instalacion-y-configuracion)
+1. [Descripción General](#descripción-general)
+2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+3. [Características](#características)
+4. [Instalación y Configuración](#instalación-y-configuración)
 5. [Estructura del Proyecto](#estructura-del-proyecto)
+6. [Lista de endpoints disponibles](#lista-de-endpoints-disponibles)
 
 ---
 
@@ -109,3 +110,88 @@ todo-api/
 ├── package-lock.json               # Registro de dependencias instaladas
 └── README.md                       # Documentación del proyecto
 ```
+
+## Lista de endpoints disponibles
+
+### Autenticación
+
+### `POST /users/login`
+- **Descripción**: Inicia sesión de usuario con credenciales.
+- **Parámetros**: 
+  - `email` (string): Correo electrónico del usuario.
+  - `password` (string): Contraseña del usuario.
+
+### Usuarios
+
+### `GET /users`
+- **Descripción**: Obtiene una lista de todos los usuarios.
+- **Respuesta**:
+  - 200 OK: `[{ "id": 1, "username": "francocarchedi", "email": "franconcarchedi@example.com" }]`
+- **Autenticación**: Requiere autenticación
+
+### `GET /users/:id`
+- **Descripción**: Obtiene un usuario por ID.
+- **Respuesta**:
+  - 200 OK: `{ "id": 1, "username": "francocarchedi", "email": "franconcarchedi@example.com" }`
+- **Autenticación**: Requiere autenticación
+
+### `POST /users`
+- **Descripción**: Crea un nuevo usuario.
+- **Parámetros**: 
+  - `username` (string): Nombre del usuario.
+  - `email` (string): Correo electrónico del usuario.
+  - `password` (string): Contraseña.
+- **Autenticación**: Requiere autenticación.
+
+### `PATCH /users/:id`
+- **Descripción**: Actualiza información del usuario.
+- **Parámetros**: 
+  - `username` (string): Nombre del usuario.
+  - `email` (string): Correo electrónico del usuario.
+  - `password` (string): Contraseña.
+- **Autenticación**: Requiere autenticación.
+
+### `DELETE /users/:id`
+- **Descripción**: Elimina el usuario.
+- **Parámetros**: Ninguno
+- **Autenticación**: Requiere autenticación.
+
+### Tareas
+
+### `GET /tasks`
+- **Descripción**: Obtiene una lista de tareas.
+- **Respuesta**:
+  - 200 OK: `[{ "id": 1, "name": "Mi primera tarea", "description": "Descripción de la tarea", "endsDate": "2024-12-23T03:00:00.000Z", "status": "pending", "userId": "02abd775-20d4-461c-8db8-c5fbbc3eb50f", "createdAt": "2024-12-23T03:00:00.000Z", "updatedAt": "2024-12-23T03:00:00.000Z" }]`
+- **Autenticación**: Requiere autenticación.
+
+### `GET /tasks/:id`
+- **Descripción**: Obtiene una tarea por su ID.
+- **Respuesta**:
+  - 200 OK: `{ "id": 1, "name": "Mi primera tarea", "description": "Descripción de la tarea", "endsDate": "2024-12-23T03:00:00.000Z", "status": "pending", "userId": "02abd775-20d4-461c-8db8-c5fbbc3eb50f", "createdAt": "2024-12-23T03:00:00.000Z", "updatedAt": "2024-12-23T03:00:00.000Z" }`
+- **Autenticación**: Requiere autenticación.
+
+### `GET /tasks/user/:id`
+- **Descripción**: Obtiene la lista de tareas del usuario.
+- **Respuesta**:
+  - 200 OK: `[{ "id": 1, "name": "Mi primera tarea", "description": "Descripción de la tarea", "endsDate": "2024-12-23T03:00:00.000Z", "status": "pending", "userId": "02abd775-20d4-461c-8db8-c5fbbc3eb50f", "createdAt": "2024-12-23T03:00:00.000Z", "updatedAt": "2024-12-23T03:00:00.000Z" }]`
+- **Autenticación**: Requiere autenticación.
+
+### `POST /tasks`
+- **Descripción**: Crea una nueva tarea.
+- **Parámetros**:
+  - `name` (string): Título de la tarea.
+- **Autenticación**: Requiere autenticación
+
+### `PATCH /tasks/:id`
+- **Descripción**: Actualiza la información de una tarea.
+- **Parámetros**:
+  - `name` (string): Título de la tarea.
+  - `description` (string): Descripción de la tarea.
+  - `status` (string): Estado de la tarea ('pending' o 'completed').
+  - `endsDate` (string): Fecha de vencimiento de la tarea (dd/mm/yyyy).
+- **Autenticación**: Requiere autenticación
+
+### `DELETE /tasks/:id`
+- **Descripción**: Elimina una tarea.
+- **Parámetros**: Ninguno
+- **Autenticación**: Requiere autenticación
